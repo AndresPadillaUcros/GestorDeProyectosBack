@@ -19,7 +19,7 @@ const resolversUsuario ={
 
         /* HU_010:Como LIDER, QUERY para ver la información de los estudiantes registrados en la plataforma */
         Estudiantes: async (parent,args)=>{
-            const estudiantes=await UsuarioModel.find({rol:'ESTUDIANTE'});
+            const estudiantes=await UsuarioModel.find({rol:args.rol});
             return estudiantes;
         },
 

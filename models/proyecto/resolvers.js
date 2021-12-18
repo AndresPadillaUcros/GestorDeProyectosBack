@@ -54,7 +54,7 @@ const resolversProyecto ={
         /* HU_012:Como LIDER, MUTATION para crear un nuevo proyecto */
        crearObjetivo: async(parent,args)=>{
            const proyectoConObjetivo= await ProyectoModel.findByIdAndUpdate(args.idProyecto,{
-               $addToSet:{  objetivos:{...args.campos}  }
+               $addToSet:{  objetivosEspecificos:{...args.campos}  }
                },{new:true});
            return proyectoConObjetivo;
        },
@@ -75,7 +75,8 @@ const resolversProyecto ={
             if(Object.keys(args.estado==='ACTIVO')){ 
                 const proyectoEditado= await ProyectoModel.findByIdAndUpdate(args._id,{
                     nombre:args.nombre,
-                    presupuesto:args.presupuesto,            
+                    presupuesto:args.presupuesto,        
+                    objetivoGeneral:args.objetivoGeneral    
                 },
                     {new:true}  
                 );
@@ -86,8 +87,7 @@ const resolversProyecto ={
         editarObjetivo: async(parents,args)=>{
             const proyectoEditado=await ProyectoModel.findByIdAndUpdate(args.idProyecto,{
                 $set:{
-                    [`objetivos.${args.indexObjetivo}.descripcion`]:args.campos.descripcion,
-                    [`objetivos.${args.indexObjetivo}.tipo`]:args.campos.tipo,
+                    [`objetivosEspecificos.${args.indexObjetivo}.descripcion`]:args.descripcion,     
                 }
             },{new:true}); 
             return proyectoEditado; 
@@ -97,7 +97,7 @@ const resolversProyecto ={
         eliminarObjetivo: async(parents,args)=>{
             const proyectoEditado=await ProyectoModel.findByIdAndUpdate(args.idProyecto,{
                 $pull:{
-                    objetivos:{
+                    objetivosEspecificos:{
                         _id:args.idObjetivo,
                     },
                 },
