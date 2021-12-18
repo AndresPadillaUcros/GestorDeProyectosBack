@@ -1,4 +1,4 @@
-import { UserModel } from '../../models/usuario/usuario.js';
+import { UsuarioModel } from '../../models/usuario/usuario.js';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../../utils/tokenUtils.js';
 
@@ -7,7 +7,7 @@ const resolversAutenticacion = {
     registro: async (parent, args) => {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(args.password, salt);
-      const usuarioCreado = await UserModel.create({
+      const usuarioCreado = await UsuarioModel.create({
         nombre: args.nombre,
         apellido: args.apellido,
         identificacion: args.identificacion,
@@ -29,7 +29,7 @@ const resolversAutenticacion = {
     },
 
     login: async (parent, args) => {
-      const usuarioEncontrado = await UserModel.findOne({ correo: args.correo });
+      const usuarioEncontrado = await UsuarioModel.findOne({ correo: args.correo });
       if (await bcrypt.compare(args.password, usuarioEncontrado.password)) {
         return {
           token: generateToken({
