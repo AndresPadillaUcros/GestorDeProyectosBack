@@ -76,7 +76,7 @@ const resolversProyecto ={
                 const proyectoEditado= await ProyectoModel.findByIdAndUpdate(args._id,{
                     nombre:args.nombre,
                     presupuesto:args.presupuesto, 
-                    objetivoGeneral:args.objetivoGeneral           
+                    objetivoGeneral:args.objetivoGeneral      
                 },
                     {new:true}  
                 );

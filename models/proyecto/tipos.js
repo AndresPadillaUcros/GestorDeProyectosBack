@@ -63,6 +63,7 @@ const tiposProyecto= gql`
             nombre: String!
             presupuesto:String!
             objetivoGeneral: String!
+            
         ):Proyecto
 
         crearObjetivo(idProyecto:String!, campos:camposObjetivo!):Proyecto
