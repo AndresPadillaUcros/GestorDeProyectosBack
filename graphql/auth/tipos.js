@@ -5,6 +5,7 @@ const tiposAutenticacion = gql`
     token: String
     error: String
   }
+
   type Mutation {
     registro(
       nombre: String!
@@ -15,9 +16,9 @@ const tiposAutenticacion = gql`
       estado: Enum_EstadoUsuario
       password: String!
     ): Token!
-    
-    login(correo: String!, password: String!): Token
 
+    login(correo: String!, password: String!): Token
+    
     refreshToken: Token
   }
 `;
