@@ -54,8 +54,11 @@ const tiposProyecto= gql`
         
         aprobarProyecto(
             _id:String!,
-            estado: Enum_EstadoProyecto!
-            fase: Enum_FaseProyecto!
+            nombre: String
+            presupuesto:String
+            objetivoGeneral: String
+            estado: Enum_EstadoProyecto
+            fase: Enum_FaseProyecto
         ):Proyecto
 
         editarProyecto(
