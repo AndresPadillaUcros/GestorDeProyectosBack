@@ -17,10 +17,6 @@ const tiposUsuario= gql`
     type Query{
         Usuarios:[Usuario]
         Usuario(_id:String!):Usuario
-<<<<<<< HEAD
-        Estudiantes(rol:Enum_Rol!):[Usuario]
-=======
->>>>>>> test
         ProyectosLiderados(_id:String!):Usuario
         SolicitudesInscripcion(_id:String!):Usuario
     }

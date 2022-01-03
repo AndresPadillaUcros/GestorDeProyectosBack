@@ -3,21 +3,6 @@ import jwt from 'jsonwebtoken';
 const validateToken = (token) => {
   if (token) {
     const verification = jwt.verify(token, 'secret', (err, data) => {
-<<<<<<< HEAD
-      if (data) {
-        return {
-          data: data,
-        };
-      }
-      if (err) {
-        return {
-          error: err,
-        };
-      }
-    });
-    console.log(verification, token);
-    return verification;
-=======
       if(data){
         return {data:data};
       }
@@ -26,7 +11,6 @@ const validateToken = (token) => {
       }
     });
     return verification
->>>>>>> test
   }
 };
 
