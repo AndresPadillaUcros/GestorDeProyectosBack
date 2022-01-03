@@ -12,4 +12,4 @@ const tiposGlobales= gql`
 
 `;
 
-export const tipos=[tiposGlobales, tiposUsuario, tiposProyecto,tiposAvance, tiposEnums,tiposInscripcion]
+export const tipos=[tiposGlobales, tiposUsuario, tiposProyecto,tiposAvance, tiposEnums,tiposInscripcion,tiposAutenticacion]

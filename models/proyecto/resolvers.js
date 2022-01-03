@@ -62,6 +62,9 @@ const resolversProyecto ={
         /* HU_007,HU_008, HU_009 :Como ADMINISTRADOR, MUTATION para cambiar el estado o fase un proyecto */
         aprobarProyecto:  async(parent,args)=>{
             const aprobarProyecto= await ProyectoModel.findByIdAndUpdate(args._id,{
+                nombre:args.nombre,
+                presupuesto:args.presupuesto,
+                objetivoGeneral:args.objetivoGeneral,
                 fase: args.fase,
                 estado: args.estado,
                 },
@@ -75,8 +78,8 @@ const resolversProyecto ={
             if(Object.keys(args.estado==='ACTIVO')){ 
                 const proyectoEditado= await ProyectoModel.findByIdAndUpdate(args._id,{
                     nombre:args.nombre,
-                    presupuesto:args.presupuesto,        
-                    objetivoGeneral:args.objetivoGeneral    
+                    presupuesto:args.presupuesto, 
+                    objetivoGeneral:args.objetivoGeneral      
                 },
                     {new:true}  
                 );
@@ -87,7 +90,7 @@ const resolversProyecto ={
         editarObjetivo: async(parents,args)=>{
             const proyectoEditado=await ProyectoModel.findByIdAndUpdate(args.idProyecto,{
                 $set:{
-                    [`objetivosEspecificos.${args.indexObjetivo}.descripcion`]:args.descripcion,     
+                    [`objetivosEspecificos.${args.indexObjetivo}.descripcion`]:args.descripcion,
                 }
             },{new:true}); 
             return proyectoEditado; 

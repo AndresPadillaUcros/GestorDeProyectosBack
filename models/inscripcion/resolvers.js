@@ -11,24 +11,24 @@ const resolversInscripcion={
         },
         estudiante: async(parent,args)=>{
             return await UsuarioModel.findOne({_id:parent.estudiante}).populate('inscripciones');
-        },
+        }
     },
 
 
     Query:{
-        Inscripciones:async(parent,args)=>{
+        Inscripciones:async(parent,args,context)=>{
             let filtro = {};
-            const projects= await ProyectoModel.find({lider:'61ae26807de7e64c94128677'});
+            const projects= await ProyectoModel.find({lider:context.userData._id});
             const projectList =projects.map((p)=>p._id.toString());
             filtro ={
                 proyecto:{
-                    $in:projectList,
+                    $in:projectList, 
                 }
             }
             const inscripciones=await InscripcionModel.find({...filtro});
             return inscripciones;
         },
-
+        
         FiltrarInscripcionPorEstudiante:async(parent,args)=>{
             const filtrarInscripcionPorEstudiante=await InscripcionModel.find({'estudiante':args._id});
             return filtrarInscripcionPorEstudiante;

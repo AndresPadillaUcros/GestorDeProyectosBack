@@ -4,23 +4,23 @@ const resolversUsuario ={
 
     Query:{
         /* HU_004:Como ADMINISTRADOR, QUERY para ver la información de los usuarios registrados en la plataforma */
-        Usuarios: async (parent,args)=>{
-            const usuarios=await UsuarioModel.find().populate([
-                {path:'inscripciones',populate:{path:'proyecto',populate:{path:'lider'}}},
-                {path:'proyectosLiderados'} 
-            ])
-            return usuarios;
+        Usuarios: async (parent,args,context)=>{
+            console.log('context',context)
+            if(context.userData.rol==='ADMINISTRADOR'){
+                const usuarios=await UsuarioModel.find().populate([
+                    {path:'inscripciones',populate:{path:'proyecto',populate:{path:'lider'}}},
+                    {path:'proyectosLiderados'} 
+                ])
+                return usuarios;
+            }else if (context.userData.rol==='LIDER'){
+                const estudiantes=await UsuarioModel.find({rol:'ESTUDIANTE'});
+                return estudiantes;
+            }  
         },
 
         Usuario: async(parent,args)=>{
             const usuario=await UsuarioModel.findOne({_id:args._id}).populate('inscripciones');
             return usuario;
-        },
-
-        /* HU_010:Como LIDER, QUERY para ver la información de los estudiantes registrados en la plataforma */
-        Estudiantes: async (parent,args)=>{
-            const estudiantes=await UsuarioModel.find({rol:args.rol});
-            return estudiantes;
         },
 
         /* HU_013:Como LIDER, QUERY para ver la lista de proyectos que se lideran */

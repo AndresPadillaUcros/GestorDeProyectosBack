@@ -24,7 +24,10 @@ const usuarioSchema = new Schema({
         type:String,
         required:true
     },
+<<<<<<< HEAD
 
+=======
+>>>>>>> test
     identificacion:{
         type:String,
         required:true,
